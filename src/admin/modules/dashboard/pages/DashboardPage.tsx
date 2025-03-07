@@ -16,11 +16,10 @@ export const DashboardPage = () => {
 
     const dispatch = useAppDispatch();
     
-    const { sUsuario } = useSelector((state: any) => state.auth);
-
+    const { sUsuario, dFechaNac } = useSelector((state: any) => state.auth);
 
     /////////////////////////////////////////////////////
-    const [open, setOpen] = useState(false);
+    const [open, setOpen ] = useState(false);
 
     const handleOpenModal = (row: any) => {
         dispatch(setActiveUser(row));
@@ -80,7 +79,8 @@ export const DashboardPage = () => {
             <Grid container spacing={4}>
                 <Grid size={3}>
                     <CardAdmin>
-                        <DatepickerAdmin />
+                        <Typography variant="h5"><b>CUMPLEAÑOS</b></Typography>
+                        <DatepickerAdmin selectedDate={dFechaNac} />
                     </CardAdmin>
                 </Grid>
 
