@@ -14,8 +14,8 @@ export const useCheckAuth = () => {
     
         if (savedToken) {
             
-            const { nIdUsuario, sUsuario } = jwtDecode<{ nIdUsuario: number, sUsuario: string }>(savedToken);
-            dispatch(login({ savedToken, nIdUsuario, sUsuario }));
+            const { nIdUsuario, sUsuario, dFechaNac } = jwtDecode<{ nIdUsuario: number, sUsuario: string, dFechaNac: Date }>(savedToken);
+            dispatch(login({ savedToken, nIdUsuario, sUsuario, dFechaNac }));
 
         } else {
             dispatch(logOut({ errorMessage: null }));

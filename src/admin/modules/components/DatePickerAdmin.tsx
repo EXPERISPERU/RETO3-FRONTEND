@@ -11,7 +11,7 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 // Configurar dayjs para que use el idioma español
 dayjs.locale('es');
 
-export const DatepickerAdmin = () => {
+export const DatepickerAdmin = ({ selectedDate }: { selectedDate: string | null }) => {
     return (
         <>
             <LocalizationProvider
@@ -29,7 +29,7 @@ export const DatepickerAdmin = () => {
                 >
                     <DemoItem >
                         <StaticDatePicker
-                            defaultValue={dayjs('2022-04-17')}
+                            value={selectedDate ? dayjs(selectedDate, "DD/MM/YYYY HH:mm:ss") : null}
                             sx={{   
                                 background: "transparent",
                                 borderRadius: "10px",
