@@ -1,14 +1,16 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { IconButton, List, ListItem } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface DashboardTableProps {
     rows: any[];
     handleOpenModal: (row: any) => void;
-    handleCloseModal: () => void;
+    handleDeleteUser: (row: any) => void;
 }
 
-export const UserTable = ({ rows, handleOpenModal, handleCloseModal }: DashboardTableProps) => {
+export const UserTable = ({ rows, handleOpenModal, handleDeleteUser  }: DashboardTableProps) => {
+    
 
     const columns: GridColDef[] = [
         { field: 'nIdUsuario', headerName: 'ID', width: 70 }
@@ -28,23 +30,35 @@ export const UserTable = ({ rows, handleOpenModal, handleCloseModal }: Dashboard
                             padding: 0
                             ,width: '40px'
                             ,marginRight: '5px'
-                            ,background: '#8dffa0'
                             ,borderRadius: '8px'
+                        }
+                        ,'& .MuiListItem-root:first-of-type': {
+                            background: '#8dffa0'
+                        }
+                        ,'& .MuiListItem-root:last-child': {
+                            background: 'red'
                         }
                     }}
                 >
                     <ListItem>
-                        <IconButton onClick={() => handleOpenModal(params.row)} color="primary"> <EditIcon /> </IconButton>
+                        <IconButton
+                            onClick={ () => { handleOpenModal(params.row) }}
+                            style={{ color: "#2e7d32"}}
+                        >
+                            <EditIcon />
+                        </IconButton>
                     </ListItem>
                     <ListItem>
-                        <IconButton onClick={() => handleCloseModal()} color="primary"> <EditIcon /> </IconButton>
+                        <IconButton onClick={() => handleDeleteUser(params.row)} style={{ color: "#ffcdd2"}}> <DeleteIcon /> </IconButton>
                     </ListItem>
                 </List>
             ),
         },
     ];   
     
-    const paginationModel = { page: 0, pageSize: 5 };  
+    const paginationModel = { page: 0, pageSize: 5 };
+
+    
 
     return (
         <>

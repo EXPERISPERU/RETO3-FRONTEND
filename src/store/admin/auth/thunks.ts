@@ -1,6 +1,8 @@
 import axios from "axios";
 import { AppDispatch } from "../../store";
 import { checkingCredentials, login, logOut } from "./";
+import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
 
 export const checkingAuthentication = () => {
     return async( dispatch: AppDispatch ) => {
@@ -22,10 +24,15 @@ export const startLoginWithEmailPassword = ( sUsuario: string, sPassword: string
 
             if (response.data.success) {
                 const token = response.data.data;
-                dispatch(login({ token }));
+                // Decodificar el token
+                const { nIdUsuario, sUsuario } = jwtDecode<{ nIdUsuario: number, sUsuario: string }>(token);
+                 dispatch(login({ token, nIdUsuario, sUsuario }));
+
                 localStorage.setItem('authToken', token);
+                Swal.fire("Bienvenido", sUsuario, "success");
             } else {
-                dispatch(logOut({ errorMesage: null }));
+                dispatch(logOut( response.data ));
+                Swal.fire("Alerta", response.data.errMsj, "warning");
             }
         } catch (error) {
             console.error("Error al iniciar sesión:", error);

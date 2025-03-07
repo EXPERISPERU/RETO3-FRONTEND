@@ -1,7 +1,6 @@
-import isotipo from '../img/isotipo.png';
 import Grid from "@mui/material/Grid2";
 import { Box, Button, Card, Checkbox, CssBaseline, Divider, FormControl, FormControlLabel, FormLabel, TextField, Typography } from '@mui/material';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { startLoginWithEmailPassword } from '../../../../store/admin/auth';
 import { useAppDispatch } from '../../../../hooks/reactRedux';
 import { useForm } from '../../../../hooks/useForm';
@@ -11,6 +10,9 @@ import ForgotPassword from '../../components/ForgotPassword';
 import { FacebookIcon, GoogleIcon } from '../../components/CustomIcons';
 import styles from '../css/LoginStyle.module.css';
 import { SignInContainer } from '../../components';
+import isotipo from '../img/isotipo.png';
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 
 const formData = {
@@ -49,7 +51,7 @@ export const LoginPage = (props: { disableCustomTheme?: boolean }) => {
 
         dispatch( startLoginWithEmailPassword(sUsuario, sPassword));
     }
-
+    
     // const onGoogleSignIn = () => {
     //     console.log('onGoogleSignIn');
     //     //dispatch( startGoogleSignIn());

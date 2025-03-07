@@ -13,9 +13,7 @@ export const AdminRoutes = () => {
     if ( status === 'checking' ) {
       return <CheckingAuth />
     }
-
-    console.log(status);
-
+    
     return (
         <Routes>
             {status === 'authenticated' ? (

@@ -1,22 +1,49 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface UserState {
-    users: any[]; // Aquí se puede ajustar según el tipo de datos de los usuarios
-}
-
-const initialState: UserState = {
-    users: [], // Inicializa el array vacío para evitar `undefined`
-};
-
 export const userSlice = createSlice({
     name: 'user'
-    ,initialState: initialState
+    ,initialState: {
+        users: {
+            sUsuario        : null
+            ,sPassword      : null
+            ,bActivo        : null
+            ,nIdPersona     : null
+            ,nIdUsuario_crea: null
+        },
+        errMsj: '',
+        success: false || null,
+        data: null,
+        active: null
+    }
     ,reducers: {
         listUsers: (state, { payload } ) => {
-            // Almacena el array de usuarios en el estado
+            state.success = payload.success;
             state.users = payload.data;
-            console.log(payload.data); // Verifica que los usuarios se están asignando correctamente
+            state.errMsj = payload.errMsj;
         },
+        saveUser: ( state, { payload }) => {
+            state.success = payload.success;
+            state.data = payload.data;
+            state.errMsj = payload.errMsj;
+        },
+        setActiveUser: (state, action ) => {
+            state.active = action.payload;
+        },
+        updateUser: ( state, { payload } ) => {
+            state.success = payload.success;
+            state.data = payload.data;
+            state.errMsj = payload.errMsj;
+        },
+        deleteUser: ( state, { payload } ) => {
+            state.success = payload.success;
+            state.data = payload.data;
+            state.errMsj = payload.errMsj;
+        },
+        clearUserLogout: ( state ) => {
+            state.success = null;
+            state.data = null;
+            state.errMsj = '';
+        }
     }
 });
-export const { listUsers } = userSlice.actions;
+export const { listUsers, saveUser, setActiveUser, updateUser, deleteUser, clearUserLogout } = userSlice.actions;

@@ -12,6 +12,7 @@ import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import { Logout } from "@mui/icons-material";
 import { useAppDispatch } from "../../../../../hooks/reactRedux";
 import { startLogOut } from "../../../../../store/admin/auth";
+import { cleanUserLogout } from "../../../../../store/admin/user";
 
 export const SideBar = () => {
 
@@ -19,6 +20,7 @@ export const SideBar = () => {
     const [ dense, setDense ] = useState(false);
 
     const onLogOut = () => {
+        dispatch( cleanUserLogout());
         dispatch( startLogOut());
     }
 
