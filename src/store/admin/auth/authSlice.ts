@@ -4,25 +4,24 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         status          : 'checking' // 'Checking', 'not-authenticaded', 'authenticated'
-        ,uid            : null
+        ,nIdUsuario     : null
         ,sUsuario       : null
         ,errorMessage   : null
-        // ,products       : []
     },
     reducers: {
-        login: ( state, { payload } ) => {
+        login: ( state, { payload } ) => {           
             state.status    = 'authenticated';
-            state.uid           = payload.uid;
+            state.nIdUsuario    = payload.nIdUsuario;
             state.sUsuario      = payload.sUsuario;
             state.errorMessage  = payload.errorMessage;
-            // Guardar el token en localStorage
-            localStorage.setItem('authToken', payload.token);
+            // // Guardar el token en localStorage
+            // localStorage.setItem('authToken', payload.token);
         },
         logOut: ( state, { payload } ) => {
             state.status        = 'not-authenticaded';
-            state.uid           = null;
+            state.nIdUsuario    = null;
             state.sUsuario      = null;
-            state.errorMessage  = payload?.errorMessage;
+            state.errorMessage  = payload.errMsj;
         },
         checkingCredentials: ( state ) => {
             state.status = 'checking';

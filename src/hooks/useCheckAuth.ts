@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logOut } from '../store/admin/auth';
+import { jwtDecode } from 'jwt-decode';
 
 
 export const useCheckAuth = () => {
@@ -12,7 +13,10 @@ export const useCheckAuth = () => {
         const savedToken = localStorage.getItem('authToken'); // Asumiendo que guardas el token en el localStorage
     
         if (savedToken) {
-            dispatch(login({ token: savedToken }));
+            
+            const { nIdUsuario, sUsuario } = jwtDecode<{ nIdUsuario: number, sUsuario: string }>(savedToken);
+            dispatch(login({ savedToken, nIdUsuario, sUsuario }));
+
         } else {
             dispatch(logOut({ errorMessage: null }));
         }

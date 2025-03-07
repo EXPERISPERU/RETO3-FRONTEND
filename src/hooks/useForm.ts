@@ -8,7 +8,11 @@ export const useForm = <T>( initialForm:any, formValidations:any = {} ) => {
 
     useEffect(() => {
         createValidators();
-    }, [ formState ])
+    }, [ formState ]);
+
+    useEffect(() => {
+        setFormState( initialForm );
+    }, [ initialForm ])
     
     const isFormValid = useMemo( () => {
 
@@ -43,10 +47,9 @@ export const useForm = <T>( initialForm:any, formValidations:any = {} ) => {
     const createValidators = () => {
         
         const formCheckedValues:any = {};
-        
+
         for (const formField of Object.keys( formValidations )) {
             const [ fn, errorMessage ] = formValidations[formField];
-
             formCheckedValues[`${ formField }Valid`] = fn( formState[formField] ) ? null : errorMessage;
         }
 
